@@ -2,44 +2,56 @@ package me.pasindu.movieexplorer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.pasindu.movieexplorer.data.*
 
 class MainActivity : AppCompatActivity() {
 
+    //    Add Movies to Database Button Declarations
     private lateinit var addMToDBButton: Button
+
+    //    Search for movies Button Declaration
     private lateinit var sFMButton: Button
+
+    //    Search for actor Button Declaration
     private lateinit var sFAButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        define data access object
         val movieDao = (application as MovieApp).db.movieDao()
 
         addMToDBButton = findViewById(R.id.amtDBButton)
         sFMButton = findViewById(R.id.sfmButton)
         sFAButton = findViewById(R.id.sfaButton)
 
+//        Set click listener for add movies to database button
         addMToDBButton.setOnClickListener {
+//            Invoke addDefaultMoviesToDB method and parse data access object
             addDefaultMoviesToDB(movieDao)
         }
 
+//        Set click listener for search for movies button
         sFMButton.setOnClickListener {
-            lifecycleScope.launch {
-                movieDao.fetchMovieByActor("El").collect {
-                    Log.i("NO", it.toString())
-                }
-            }
+//            TODO Implement search for movies button functionality
+        }
+
+        sFAButton.setOnClickListener {
+//            TODO Implement search for actors button functionality
         }
     }
 
+    /**
+     * This [addDefaultMoviesToDB] Method Add Hardcoded movies to database
+     * @param movieDao Data Access Object
+     */
     private fun addDefaultMoviesToDB(movieDao: MovieDao) {
+//        list of Movie objects
         val listOfMovies = listOf(
             Movie(
                 "The Shawshank Redemption",
@@ -103,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+//        list of Actor objects
         val listOfActors = listOf(
             Actor(
                 "Tim Robbins"
@@ -154,6 +167,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+//        list of MovieActorCrossRef objects
         val listOfCrossRef = listOf(
             MovieActorCrossRef(
                 "The Shawshank Redemption",
@@ -220,21 +234,27 @@ class MainActivity : AppCompatActivity() {
                 "Carrie-Anne Moss"
             )
         )
+//        define lifecycleScope routine for add data to database
         lifecycleScope.launch {
 
+//            add movies to movie_table
             listOfMovies.forEach {
                 movieDao.insert(it)
             }
 
+//            add actors to actor_table
             listOfActors.forEach {
                 movieDao.insert(it)
             }
 
+//            add MovieActorCrossRef to movie_actor_cross_ref table
             listOfCrossRef.forEach {
                 movieDao.insertMovieActorCrossRef(it)
             }
 
-            Toast.makeText(applicationContext, "Movies Added to Database!", Toast.LENGTH_SHORT).show()
+//            display toast notification after operation ends
+            Toast.makeText(applicationContext, "Movies Added to Database!", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }
