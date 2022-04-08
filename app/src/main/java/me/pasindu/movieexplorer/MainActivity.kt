@@ -1,5 +1,6 @@
 package me.pasindu.movieexplorer
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -38,11 +39,14 @@ class MainActivity : AppCompatActivity() {
 
 //        Set click listener for search for movies button
         sFMButton.setOnClickListener {
-//            TODO Implement search for movies button functionality
+            val searchForMoviesActivity = Intent(this, SearchForMovies::class.java)
+            startActivity(searchForMoviesActivity)
         }
 
+//        Set click listener for search for actors button
         sFAButton.setOnClickListener {
-//            TODO Implement search for actors button functionality
+            val searchForActorsActivity = Intent(this, SearchForActors::class.java)
+            startActivity(searchForActorsActivity)
         }
     }
 
@@ -62,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                 "Drama",
                 "Frank Darabont",
                 "Stephen King, Frank Darabont",
+                "Tim Robbins, Morgan Freeman, Bob Gunton",
                 "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
                 "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
             ),
@@ -74,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                 "Animation, Action, Crime, Drama, Thriller",
                 "Jay Oliva",
                 "Bob Kane (character created by: Batman), Frank Miller (comic book), Klaus Janson (comic book), Bob Goodman",
+                "Peter Weller, Ariel Winter, David Selby, Wade Williams",
                 "Batman has not been seen for ten years. A new breed of criminal ravages Gotham City, forcing 55-year-old Bruce Wayne back into the cape and cowl. But, does he still have what it takes to fight crime in a new era?",
                 "https://m.media-amazon.com/images/M/MV5BMzIxMDkxNDM2M15BMl5BanBnXkFtZTcwMDA5ODY1OQ@@._V1_SX300.jpg"
             ),
@@ -86,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                 "Action, Adventure, Drama",
                 "Peter Jackson",
                 "J.R.R. Tolkien, Fran Walsh, Philippa Boyens",
+                "Elijah Wood, Viggo Mortensen, Ian McKellen",
                 "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
                 "https://m.media-amazon.com/images/M/MV5BNzA5ZDNlZWMtM2NhNS00NDJjLTk4NDItYTRmY2EwMWZlMTY3XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
             ),
@@ -98,6 +105,7 @@ class MainActivity : AppCompatActivity() {
                 "Action, Adventure, Sci-Fi",
                 "Christopher Nolan",
                 "Christopher Nolan",
+                "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
                 "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
                 "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg"
             ),
@@ -110,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                 "Action, Sci-Fi",
                 "Lana Wachowski, Lilly Wachowski",
                 "Lilly Wachowski, Lana Wachowski",
+                "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
                 "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
                 "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"
             )
