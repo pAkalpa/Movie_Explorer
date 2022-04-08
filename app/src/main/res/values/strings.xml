@@ -3,4 +3,7 @@
     <string name="amtDB">Add Movies to DB</string>
     <string name="sfm">Search for Movies</string>
     <string name="sfa">Search for Actors</string>
+    <string name="retrieve_movie">Retrieve Movie</string>
+    <string name="save_movie_to_database">Save movie to Database</string>
+    <string name="enter_movie_name">🔍 Enter Movie Name</string>
 </resources>
