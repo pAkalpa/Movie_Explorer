@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieExplorer">
         <activity
+            android:name=".actor_item"
+            android:exported="false" />
+        <activity
             android:name=".SearchForMoviesWeb"
             android:exported="false" />
         <activity

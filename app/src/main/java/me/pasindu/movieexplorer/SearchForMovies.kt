@@ -13,6 +13,10 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import me.pasindu.movieexplorer.data.Actor
+import me.pasindu.movieexplorer.data.Movie
+import me.pasindu.movieexplorer.data.MovieActorCrossRef
+import me.pasindu.movieexplorer.data.MovieApp
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.IOException
@@ -44,6 +48,9 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
 
     private var isDataAvailable = false
 
+    private lateinit var movieObj: Movie
+    private var actorObjList = mutableListOf<Actor>()
+    private var movieActorCrossRefObjList = mutableListOf<MovieActorCrossRef>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,12 +95,35 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
             }
             saveToDbButton.id -> {
                 if (isDataAvailable) {
-//                    TODO Implement this
+                    insertToDatabase()
                 } else {
                     Toast.makeText(this, "Movie Data Not Available", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    private fun insertToDatabase() {
+        //        define data access object
+        val movieDao = (application as MovieApp).db.movieDao()
+
+        lifecycleScope.launch {
+            movieDao.insert(movieObj)
+
+            actorObjList.forEach {
+                movieDao.insert(it)
+            }
+
+            movieActorCrossRefObjList.forEach {
+                movieDao.insertMovieActorCrossRef(it)
+            }
+        }
+
+        Toast.makeText(
+            applicationContext,
+            "${movieObj.title} Added to Database!",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun requestData() {
@@ -111,7 +141,8 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setMovieData(responseObject: JSONObject) {
-        runOnUiThread(Runnable {
+        var actorArray: Array<String>
+        runOnUiThread {
             when (responseObject.getBoolean("Response")) {
                 true -> {
                     movieET.text.clear()
@@ -161,6 +192,32 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
                             posterIv.setImageBitmap(image.await())
                         }
                     }
+
+                    movieObj = Movie(
+                        responseObject.getString("Title"),
+                        responseObject.getString("Year"),
+                        responseObject.getString("Rated"),
+                        responseObject.getString("Released"),
+                        responseObject.getString("Runtime"),
+                        responseObject.getString("Genre"),
+                        responseObject.getString("Director"),
+                        responseObject.getString("Writer"),
+                        responseObject.getString("Actors"),
+                        responseObject.getString("Plot"),
+                        responseObject.getString("Poster")
+                    )
+                    actorArray = responseObject.getString("Actors").split(",").toTypedArray()
+
+                    for (i in actorArray) {
+                        actorObjList.add(Actor(i.trimStart()))
+                        movieActorCrossRefObjList.add(
+                            MovieActorCrossRef(
+                                responseObject.getString("Title"),
+//                                trimStart() - remove first space
+                                i.trimStart(),
+                            )
+                        )
+                    }
                 }
                 false -> {
                     isDataAvailable = false
@@ -170,7 +227,7 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
                     messageIv.setImageResource(R.drawable.seek_not)
                 }
             }
-        })
+        }
     }
 }
 
@@ -181,13 +238,13 @@ get() {
     }catch (e: IOException){null}
 }
 
-fun EditText.showKeyboard(
-) {
-    requestFocus()
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
-            InputMethodManager
-    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-}
+//fun EditText.showKeyboard(
+//) {
+//    requestFocus()
+//    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
+//            InputMethodManager
+//    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+//}
 
 fun EditText.hideKeyboard(
 ) {
