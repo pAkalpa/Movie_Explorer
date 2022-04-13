@@ -3,12 +3,9 @@ package me.pasindu.movieexplorer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class SearchForActors : AppCompatActivity() {
+class SearchForMoviesWeb : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search_for_actors)
-
-//        hide action bar
-        this.supportActionBar!!.hide()
+        setContentView(R.layout.activity_search_for_movies_web)
     }
 }

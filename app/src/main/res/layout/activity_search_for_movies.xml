@@ -4,50 +4,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="top|center"
     android:background="@drawable/detail_container"
+    android:gravity="top|center"
     android:orientation="vertical"
     tools:context=".SearchForMovies">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/search_bar"
+        android:theme="@style/EditTextThemeOverlay"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:hint="@string/enter_movie_name"
-        android:textColorHint="@color/whiteHint"
-        android:inputType="text"
-        android:autofillHints="" />
+        android:background="@drawable/search_bar"
+        app:startIconDrawable="@drawable/ic_round_search_24"
+        app:startIconTint="@color/white_75"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/white_75"
+        app:hintTextColor="@color/white_75">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/movieEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_75"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/be_vietnam_pro"
+            android:inputType="text"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:maxLength="50"
+            android:textColorHint="@color/white_75"
+            android:textSize="18sp"
+            android:layout_margin="8dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    <EditText-->
+<!--        android:id="@+id/movieEt"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:autofillHints=""-->
+<!--        android:background="@drawable/search_bar"-->
+<!--        android:focusableInTouchMode="true"-->
+<!--        android:fontFamily="@font/be_vietnam_pro"-->
+<!--        android:hint="@string/enter_movie_name"-->
+<!--        android:inputType="text"-->
+<!--        android:maxLength="50"-->
+<!--        android:textColor="@color/white_75"-->
+<!--        android:textColorHint="@color/white_50" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/retrieveButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="77dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/be_vietnam_pro"
+            android:padding="4dp"
             android:text="@string/retrieve_movie"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white_75" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/be_vietnam_pro"
+            android:padding="4dp"
             android:text="@string/save_movie_to_database"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:textColor="@color/white_75" />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/messageLl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:gravity="center"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/messageIv"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/seek" />
+
+        <TextView
+            android:id="@+id/messageTvA1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="@string/we_are_sorry_we_can_nnot_find_the_movie"
+            android:textColor="@color/white_75"
+            android:textSize="25sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/find_your_movie_by_title"
+            android:textAlignment="center"
+            android:textColor="@color/white_75" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/movieDataLl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/posterIv"
@@ -57,17 +146,14 @@
             android:adjustViewBounds="true"
             android:background="@drawable/round_outline"
             android:clipToOutline="true"
-            android:visibility="gone"
             android:scaleType="centerInside"
-            android:src="@drawable/sample" />
+            android:src="@drawable/n_a" />
 
         <LinearLayout
-            android:id="@+id/detailLl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:visibility="gone"
             android:layout_margin="20dp"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <LinearLayout
@@ -79,23 +165,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Title"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/title"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/titleTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Matrix"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -108,23 +189,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Year"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/year"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/yearTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="1999"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -137,23 +213,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Rated"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/rated"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/ratedTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="R"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -166,23 +237,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Released"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/released"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/releasedTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="31 Mar 1999"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -195,23 +261,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Runtime"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/runtime"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/runtimeTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="136 min"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -224,23 +285,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Genre"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/genre"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/genreTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Action, Sci-Fi"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -253,23 +309,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Director"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/director"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/directorsTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lana Wachowski, Lilly Wachowski"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -282,23 +333,18 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Writer"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/writer"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/writersTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lilly Wachowski, Lana Wachowski"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
@@ -311,70 +357,48 @@
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Actors"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/actors"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/actorsTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
-                    android:text="Plot"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/plot"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text=": " />
+                    android:textColor="@color/white_75" />
 
                 <TextView
                     android:id="@+id/plotTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="When a beautiful stranger leads computer hacker Neo to a
-forbidding underworld, he discovers the shocking truth--the life he
-knows is the elaborate deception of an evil cyber-intelligence."
+                    android:fontFamily="@font/montserrat_medium"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white_75" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <!--    <ImageView-->
-    <!--        android:layout_width="300dp"-->
-    <!--        android:layout_height="450dp"-->
-    <!--        android:adjustViewBounds="true"-->
-    <!--        android:background="@drawable/round_outline"-->
-    <!--        android:clipToOutline="true"-->
-    <!--        android:scaleType="centerInside"-->
-    <!--        android:src="@drawable/sample" />-->
-
 
 </LinearLayout>

@@ -5,5 +5,23 @@
     <string name="sfa">Search for Actors</string>
     <string name="retrieve_movie">Retrieve Movie</string>
     <string name="save_movie_to_database">Save movie to Database</string>
-    <string name="enter_movie_name">🔍 Enter Movie Name</string>
+    <string name="enter_movie_name">Enter Movie Name</string>
+    <string name="search_for_movies_web">Search for Movies (WEB)</string>
+    <string name="we_are_sorry_we_can_nnot_find_the_movie">We Are Sorry, We Can\nNot Find The Movie :(</string>
+    <string name="find_your_movie_by_title">Find your movie by title</string>
+    <string name="icon">icon</string>
+    <string name="enter_actor_name">🔍 Enter Actor Name</string>
+    <string name="search_web">Search WEB</string>
+    <string name="search">Search</string>
+    <string name="find_your_movie_by_actor_name">Find your movie by actor name</string>
+    <string name="title">Title</string>
+    <string name="year">Year</string>
+    <string name="rated">Rated</string>
+    <string name="released">Released</string>
+    <string name="runtime">Runtime</string>
+    <string name="genre">Genre</string>
+    <string name="director">Director</string>
+    <string name="writer">Writer</string>
+    <string name="actors">Actors</string>
+    <string name="plot">Plot</string>
 </resources>

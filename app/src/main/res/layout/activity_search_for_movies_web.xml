@@ -4,75 +4,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/detail_container"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".SearchForActors">
+    android:background="@drawable/detail_container"
+    tools:context=".SearchForMoviesWeb">
 
     <EditText
-        android:id="@+id/actorEt"
+        android:id="@+id/webMovieEt"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="45dp"
         android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
-        android:background="@drawable/search_bar"
-        android:focusableInTouchMode="true"
-        android:fontFamily="@font/be_vietnam_pro"
-        android:hint="@string/enter_actor_name"
-        android:inputType="text"
         android:textColor="@color/white_75"
-        android:textColorHint="@color/white_50" />
+        android:focusableInTouchMode="true"
+        android:background="@drawable/search_bar"
+        android:hint="@string/enter_movie_name"
+        android:textColorHint="@color/white_50"
+        android:inputType="text"
+        android:autofillHints="" />
 
     <Button
-        android:id="@+id/actorSearchButton"
+        android:id="@+id/movieSearchButton"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
+        android:padding="3dp"
+        android:textSize="15sp"
+        android:textColor="@color/white_75"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_background"
-        android:fontFamily="@font/be_vietnam_pro"
-        android:padding="3dp"
-        android:text="@string/search"
-        android:textAllCaps="false"
-        android:textColor="@color/white_75"
-        android:textSize="15sp" />
+        android:text="@string/search_web"
+        android:textAllCaps="false" />
 
     <LinearLayout
         android:id="@+id/messageLl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="210dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginTop="210dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
 
         <ImageView
             android:id="@+id/messageIv"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginBottom="5dp"
-            android:contentDescription="@string/icon"
-            android:src="@drawable/seek" />
+            android:src="@drawable/seek"
+            android:contentDescription="@string/icon" />
 
         <TextView
             android:id="@+id/messageTv"
+            android:textColor="@color/white_75"
+            android:textSize="25sp"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:text="@string/we_are_sorry_we_can_nnot_find_the_movie"
-            android:textColor="@color/white_75"
-            android:textSize="25sp"
-            android:visibility="gone" />
+            android:text="@string/we_are_sorry_we_can_nnot_find_the_movie" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="@string/find_your_movie_by_actor_name"
             android:textAlignment="center"
-            android:textColor="@color/white_75" />
+            android:textColor="@color/white_75"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/find_your_movie_by_title" />
 
     </LinearLayout>
-
 
 </LinearLayout>

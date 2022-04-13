@@ -20,9 +20,15 @@ class MainActivity : AppCompatActivity() {
     //    Search for actor Button Declaration
     private lateinit var sFAButton: Button
 
+    //    Search for movies in WEB Button Declaration
+    private lateinit var sFMWButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+//        hide action bar
+        this.supportActionBar!!.hide()
 
 //        define data access object
         val movieDao = (application as MovieApp).db.movieDao()
@@ -30,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         addMToDBButton = findViewById(R.id.amtDBButton)
         sFMButton = findViewById(R.id.sfmButton)
         sFAButton = findViewById(R.id.sfaButton)
+        sFMWButton = findViewById(R.id.sfmWButton)
 
 //        Set click listener for add movies to database button
         addMToDBButton.setOnClickListener {
@@ -47,6 +54,12 @@ class MainActivity : AppCompatActivity() {
         sFAButton.setOnClickListener {
             val searchForActorsActivity = Intent(this, SearchForActors::class.java)
             startActivity(searchForActorsActivity)
+        }
+
+//        Set click listener for search for movies web button
+        sFMWButton.setOnClickListener {
+            val searchForMoviesWebActivity = Intent(this, SearchForMoviesWeb::class.java)
+            startActivity(searchForMoviesWebActivity)
         }
     }
 
