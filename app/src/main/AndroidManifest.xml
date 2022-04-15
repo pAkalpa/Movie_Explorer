@@ -13,13 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieExplorer">
         <activity
-            android:name=".SearchForMoviesWeb"
+            android:name=".activities.SearchForMoviesWeb"
             android:exported="false" />
         <activity
-            android:name=".SearchForActors"
+            android:name=".activities.SearchForActors"
             android:exported="false" />
         <activity
-            android:name=".SearchForMovies"
+            android:name=".activities.SearchForMovies"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
