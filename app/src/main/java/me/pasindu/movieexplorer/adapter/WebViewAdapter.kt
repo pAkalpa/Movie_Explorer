@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import me.pasindu.movieexplorer.model.MovieItem
 import me.pasindu.movieexplorer.R
 
-class WebViewAdapter(var list: ArrayList<MovieItem>): RecyclerView.Adapter<WebViewAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class WebViewAdapter(var list: ArrayList<MovieItem>) :
+    RecyclerView.Adapter<WebViewAdapter.ViewHolder>() {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTv: TextView = itemView.findViewById(R.id.movieTitleTV)
         val yearTv: TextView = itemView.findViewById(R.id.movieYearTV)
     }

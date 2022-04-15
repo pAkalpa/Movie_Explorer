@@ -1,4 +1,4 @@
-package me.pasindu.movieexplorer
+package me.pasindu.movieexplorer.activities
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -13,10 +13,11 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import me.pasindu.movieexplorer.data.Actor
-import me.pasindu.movieexplorer.data.Movie
-import me.pasindu.movieexplorer.data.MovieActorCrossRef
+import me.pasindu.movieexplorer.R
 import me.pasindu.movieexplorer.data.MovieApp
+import me.pasindu.movieexplorer.data.entities.Actor
+import me.pasindu.movieexplorer.data.entities.Movie
+import me.pasindu.movieexplorer.data.entities.MovieActorCrossRef
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.IOException
@@ -232,11 +233,13 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
 }
 
 val URL.toBitmap: Bitmap?
-get() {
-    return try {
-        BitmapFactory.decodeStream(openStream())
-    }catch (e: IOException){null}
-}
+    get() {
+        return try {
+            BitmapFactory.decodeStream(openStream())
+        } catch (e: IOException) {
+            null
+        }
+    }
 
 //fun EditText.showKeyboard(
 //) {

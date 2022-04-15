@@ -7,7 +7,13 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import me.pasindu.movieexplorer.activities.SearchForActors
+import me.pasindu.movieexplorer.activities.SearchForMovies
+import me.pasindu.movieexplorer.activities.SearchForMoviesWeb
 import me.pasindu.movieexplorer.data.*
+import me.pasindu.movieexplorer.data.entities.Actor
+import me.pasindu.movieexplorer.data.entities.Movie
+import me.pasindu.movieexplorer.data.entities.MovieActorCrossRef
 
 class MainActivity : AppCompatActivity() {
 

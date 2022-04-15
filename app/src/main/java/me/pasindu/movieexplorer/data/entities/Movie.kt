@@ -1,4 +1,4 @@
-package me.pasindu.movieexplorer.data
+package me.pasindu.movieexplorer.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

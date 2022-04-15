@@ -1,17 +1,18 @@
-package me.pasindu.movieexplorer
+package me.pasindu.movieexplorer.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import me.pasindu.movieexplorer.R
 import me.pasindu.movieexplorer.adapter.WebViewAdapter
 import me.pasindu.movieexplorer.model.MovieItem
 import org.json.JSONArray
@@ -48,7 +49,8 @@ class SearchForMoviesWeb : AppCompatActivity() {
         searchBtn.setOnClickListener {
             movieEt.hideKeyboard()
             if (movieEt.text.isNotEmpty()) {
-                val request = URL("https://www.omdbapi.com/?apikey=39f8221&type=movie&s=${movieEt.text}")
+                val request =
+                    URL("https://www.omdbapi.com/?apikey=39f8221&type=movie&s=${movieEt.text}")
                 val connection = request.openConnection() as HttpURLConnection
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {
@@ -56,6 +58,9 @@ class SearchForMoviesWeb : AppCompatActivity() {
                         val responseObject = JSONTokener(response).nextValue() as JSONObject
                         if (responseObject.getBoolean("Response")) {
                             getData(responseObject)
+                            runOnUiThread {
+                                updateRecyclerView()
+                            }
                         }
                     } catch (e: Exception) {
                         e.printStackTrace()
@@ -70,11 +75,17 @@ class SearchForMoviesWeb : AppCompatActivity() {
         val arrayJSON: JSONArray = responseObject.getJSONArray("Search")
         for (i in 0 until arrayJSON.length()) {
             val item: JSONObject = arrayJSON[i] as JSONObject
-            dataList.add(MovieItem(item.getString("Title"), item.getString("Year"), item.getString("Poster")))
+            dataList.add(
+                MovieItem(
+                    item.getString("Title"),
+                    item.getString("Year"),
+                    item.getString("Poster")
+                )
+            )
         }
-            updateRecyclerView()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun updateRecyclerView() {
         recyclerView.apply {
             movieItemAdapter.list = dataList

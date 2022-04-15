@@ -7,38 +7,41 @@
     android:background="@drawable/detail_container"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".SearchForMoviesWeb">
+    tools:context=".activities.SearchForMoviesWeb">
 
-    <!--    <androidx.appcompat.widget.Toolbar-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="?attr/actionBarSize"-->
-    <!--        android:background="@color/white_75"-->
-    <!--        android:theme="@style/ThemeOverlay.AppCompat.Light"-->
-    <!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark">-->
-
-    <!--        <androidx.appcompat.widget.SearchView-->
-    <!--            android:id="@+id/search_view"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="?attr/actionBarSize"-->
-    <!--            app:queryHint="Looking for a movie ?"-->
-    <!--            android:foregroundTint="@color/black"/>-->
-
-    <!--    </androidx.appcompat.widget.Toolbar>-->
-
-    <EditText
-        android:id="@+id/webMovieEt"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
-        android:autofillHints=""
         android:background="@drawable/search_bar"
+        android:focusable="true"
         android:focusableInTouchMode="true"
-        android:hint="@string/enter_movie_name"
-        android:inputType="text"
-        android:textColor="@color/white_75"
-        android:textColorHint="@color/white_50" />
+        android:hint="@string/enter_actor_name"
+        android:theme="@style/EditTextThemeOverlay"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/white_75"
+        app:hintTextColor="@color/white_75"
+        app:startIconDrawable="@drawable/ic_round_search_24"
+        app:startIconTint="@color/white_75">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/webMovieEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/be_vietnam_pro"
+            android:inputType="text"
+            android:maxLength="50"
+            android:textColor="@color/white_75"
+            android:textColorHint="@color/white_75"
+            android:textSize="18sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/movieSearchButton"

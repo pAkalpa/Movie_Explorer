@@ -4,9 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import me.pasindu.movieexplorer.data.entities.Movie
+import me.pasindu.movieexplorer.data.entities.Actor
+import me.pasindu.movieexplorer.data.entities.MovieActorCrossRef
 
-@Database(entities = [Movie::class, Actor::class, MovieActorCrossRef::class], version = 1, exportSchema = false)
-abstract class MovieDatabase: RoomDatabase() {
+@Database(
+    entities = [Movie::class, Actor::class, MovieActorCrossRef::class],
+    version = 1,
+    exportSchema = false
+)
+abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
 

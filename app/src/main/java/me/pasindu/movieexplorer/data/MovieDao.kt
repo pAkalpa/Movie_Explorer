@@ -2,6 +2,10 @@ package me.pasindu.movieexplorer.data
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
+import me.pasindu.movieexplorer.data.entities.Actor
+import me.pasindu.movieexplorer.data.entities.ActorWithMovies
+import me.pasindu.movieexplorer.data.entities.Movie
+import me.pasindu.movieexplorer.data.entities.MovieActorCrossRef
 
 @Dao
 interface MovieDao {
@@ -35,8 +39,4 @@ interface MovieDao {
     @Transaction
     @Query("SELECT * FROM actor_table WHERE name LIKE '%'|| :keyword || '%' ORDER BY name ASC")
     fun fetchMovieByActor(keyword: String): Flow<List<ActorWithMovies>>
-
-    @Transaction
-    @Query("SELECT * FROM movie_table WHERE title LIKE '%' || :keyword || '%'")
-    fun fetchActorsByMovie(keyword: String): Flow<List<MovieWithActors>>
 }
