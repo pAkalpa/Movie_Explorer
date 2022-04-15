@@ -33,7 +33,7 @@ interface MovieDao {
      * @return [Flow] flow listOf ActorWithMovies objects
      */
     @Transaction
-    @Query("SELECT * FROM actor_table WHERE name LIKE '%'|| :keyword || '%'")
+    @Query("SELECT * FROM actor_table WHERE name LIKE '%'|| :keyword || '%' ORDER BY name ASC")
     fun fetchMovieByActor(keyword: String): Flow<List<ActorWithMovies>>
 
     @Transaction
