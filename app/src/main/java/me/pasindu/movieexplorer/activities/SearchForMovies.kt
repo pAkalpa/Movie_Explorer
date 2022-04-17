@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.lifecycle.lifecycleScope
@@ -49,6 +51,9 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
 
     private var isDataAvailable = false
 
+    private lateinit var fadeInAnim: Animation
+    private lateinit var fadeOutAnim: Animation
+
     private lateinit var movieObj: Movie
     private var actorObjList = mutableListOf<Actor>()
     private var movieActorCrossRefObjList = mutableListOf<MovieActorCrossRef>()
@@ -79,6 +84,9 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
         writerTv = findViewById(R.id.writersTv)
         actorsTv = findViewById(R.id.actorsTv)
         plotTv = findViewById(R.id.plotTv)
+
+        fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fadein)
+        fadeOutAnim = AnimationUtils.loadAnimation(this, R.anim.fadeout)
 
         retrieveButton.setOnClickListener(this)
         saveToDbButton.setOnClickListener(this)
@@ -148,7 +156,10 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
                 true -> {
                     movieET.text.clear()
                     isDataAvailable = true
+                    messageIv.setImageResource(R.drawable.seek)
+                    movieDataLayout.startAnimation(fadeInAnim)
                     movieDataLayout.visibility = View.VISIBLE
+                    messageLayout.startAnimation(fadeOutAnim)
                     messageLayout.visibility = View.GONE
                     notFoundMessage.visibility = View.GONE
 
@@ -222,7 +233,9 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
                 }
                 false -> {
                     isDataAvailable = false
+                    movieDataLayout.startAnimation(fadeOutAnim)
                     movieDataLayout.visibility = View.GONE
+                    messageLayout.startAnimation(fadeInAnim)
                     messageLayout.visibility = View.VISIBLE
                     notFoundMessage.visibility = View.VISIBLE
                     messageIv.setImageResource(R.drawable.seek_not)
@@ -240,14 +253,6 @@ val URL.toBitmap: Bitmap?
             null
         }
     }
-
-//fun EditText.showKeyboard(
-//) {
-//    requestFocus()
-//    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
-//            InputMethodManager
-//    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-//}
 
 fun EditText.hideKeyboard(
 ) {
