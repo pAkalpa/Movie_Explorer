@@ -15,6 +15,7 @@
     <string name="search">Search</string>
     <string name="find_your_movie_by_actor_name">Find your movie by actor name</string>
     <string name="title">Title</string>
+    <string name="colon">:\u0020</string>
     <string name="year">Year</string>
     <string name="rated">Rated</string>
     <string name="released">Released</string>

@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,8 +25,14 @@ class SearchForActors : AppCompatActivity() {
     private lateinit var actorET: EditText
     private lateinit var searchButton: Button
     private lateinit var recyclerView: RecyclerView
+    private lateinit var messageLayout: LinearLayout
+    private lateinit var messageIv: ImageView
+    private lateinit var messageTv: TextView
 
     private lateinit var itemAdapter: ParentAdapter
+
+    private lateinit var fadeInAnim: Animation
+    private lateinit var fadeOutAnim: Animation
 
     private var emptyDataList = arrayListOf<ActorWithMovies>()
     private var dataList = arrayListOf<ActorWithMovies>()
@@ -35,6 +44,9 @@ class SearchForActors : AppCompatActivity() {
         actorET = findViewById(R.id.actorEt)
         searchButton = findViewById(R.id.actorSearchButton)
         recyclerView = findViewById(R.id.parentRv)
+        messageLayout = findViewById(R.id.messageLl)
+        messageIv = findViewById(R.id.messageIv)
+        messageTv = findViewById(R.id.messageTv)
 
         itemAdapter = ParentAdapter(emptyDataList)
 
@@ -47,13 +59,23 @@ class SearchForActors : AppCompatActivity() {
         //        define data access object
         val movieDao = (application as MovieApp).db.movieDao()
 
+        fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.fadein)
+        fadeOutAnim = AnimationUtils.loadAnimation(this, R.anim.fadeout)
+
         searchButton.setOnClickListener {
             actorET.hideKeyboard()
             if (actorET.text.isNotEmpty()) {
+                messageLayout.startAnimation(fadeOutAnim)
+                messageLayout.visibility = View.GONE
+                recyclerView.startAnimation(fadeInAnim)
+                recyclerView.visibility = View.VISIBLE
                 getData(actorET.text.toString(), movieDao)
-                runOnUiThread {
-                    updateRecyclerView()
-                }
+            }
+        }
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean("data")) {
+                getData(savedInstanceState.getString("keyword")!!,movieDao)
             }
         }
     }
@@ -63,7 +85,33 @@ class SearchForActors : AppCompatActivity() {
             val data = movieDao.fetchMovieByActor(query)
             data.collect {
                 dataList = ArrayList(it)
+                if (dataList.isEmpty()) {
+                    messageTv.visibility = View.VISIBLE
+                    messageLayout.startAnimation(fadeInAnim)
+                    messageLayout.visibility = View.VISIBLE
+                    recyclerView.startAnimation(fadeOutAnim)
+                    recyclerView.visibility = View.GONE
+                    messageIv.setImageResource(R.drawable.seek_not)
+                } else {
+                    messageTv.visibility = View.GONE
+                    messageIv.setImageResource(R.drawable.seek)
+                }
+                runOnUiThread {
+                    updateRecyclerView()
+                }
             }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (actorET.text.isNotEmpty() && dataList.isNotEmpty()) {
+            outState.putBoolean("data", true)
+            outState.putString("keyword", actorET.text.toString())
+            Log.i("MD data", "true")
+        } else {
+            outState.putBoolean("data", false)
+            Log.i("MD data", "false")
         }
     }
 

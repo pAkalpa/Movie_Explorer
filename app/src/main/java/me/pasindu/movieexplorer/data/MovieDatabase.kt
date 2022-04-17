@@ -13,7 +13,7 @@ import me.pasindu.movieexplorer.data.entities.MovieActorCrossRef
     version = 1,
     exportSchema = false
 )
-abstract class MovieDatabase : RoomDatabase() {
+abstract class MovieDatabase: RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
 

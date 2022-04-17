@@ -157,6 +157,14 @@
                     android:textColor="@color/white_75" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
                     android:id="@+id/titleTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -177,6 +185,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/year"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
                     android:textAlignment="viewStart"
                     android:textColor="@color/white_75" />
 
@@ -205,6 +221,14 @@
                     android:textColor="@color/white_75" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
                     android:id="@+id/ratedTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -225,6 +249,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/released"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
                     android:textAlignment="viewStart"
                     android:textColor="@color/white_75" />
 
@@ -253,6 +285,14 @@
                     android:textColor="@color/white_75" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
                     android:id="@+id/runtimeTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -273,6 +313,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/genre"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
                     android:textAlignment="viewStart"
                     android:textColor="@color/white_75" />
 
@@ -301,6 +349,14 @@
                     android:textColor="@color/white_75" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
                     android:id="@+id/directorsTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -321,6 +377,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/writer"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
                     android:textAlignment="viewStart"
                     android:textColor="@color/white_75" />
 
@@ -349,6 +413,14 @@
                     android:textColor="@color/white_75" />
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
                     android:id="@+id/actorsTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -370,6 +442,14 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:text="@string/plot"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white_75" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@string/colon"
                     android:textAlignment="viewStart"
                     android:textColor="@color/white_75" />
 

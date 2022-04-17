@@ -3,13 +3,14 @@ package me.pasindu.movieexplorer.activities
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,6 @@ import me.pasindu.movieexplorer.data.entities.MovieActorCrossRef
 import org.json.JSONObject
 import org.json.JSONTokener
 import java.io.IOException
-import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -50,6 +50,8 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
     private lateinit var plotTv: TextView
 
     private var isDataAvailable = false
+
+    private lateinit var responseObject: JSONObject
 
     private lateinit var fadeInAnim: Animation
     private lateinit var fadeOutAnim: Animation
@@ -90,6 +92,14 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
 
         retrieveButton.setOnClickListener(this)
         saveToDbButton.setOnClickListener(this)
+
+        if (savedInstanceState != null) {
+            val response = savedInstanceState.getString("response", "no")
+            if (response != "no") {
+                responseObject = JSONObject(response)
+                setMovieData(responseObject)
+            }
+        }
     }
 
     override fun onClick(view: View?) {
@@ -109,6 +119,13 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
                     Toast.makeText(this, "Movie Data Not Available", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (isDataAvailable) {
+            outState.putString("response", responseObject.toString())
         }
     }
 
@@ -141,7 +158,7 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = connection.inputStream.bufferedReader().use { it.readLine() }
-                val responseObject = JSONTokener(response).nextValue() as JSONObject
+                responseObject = JSONTokener(response).nextValue() as JSONObject
                 setMovieData(responseObject)
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -163,34 +180,34 @@ class SearchForMovies : AppCompatActivity(), View.OnClickListener {
                     messageLayout.visibility = View.GONE
                     notFoundMessage.visibility = View.GONE
 
-                    val movieTitle = ": ${responseObject.getString("Title")}"
+                    val movieTitle = responseObject.getString("Title")
                     titleTv.text = movieTitle
 
-                    val movieYear = ": ${responseObject.getString("Year")}"
+                    val movieYear = responseObject.getString("Year")
                     yearTv.text = movieYear
 
-                    val movieRated = ": ${responseObject.getString("Rated")}"
+                    val movieRated = responseObject.getString("Rated")
                     ratedTv.text = movieRated
 
-                    val movieReleased = ": ${responseObject.getString("Released")}"
+                    val movieReleased = responseObject.getString("Released")
                     releasedTv.text = movieReleased
 
-                    val movieRuntime = ": ${responseObject.getString("Runtime")}"
+                    val movieRuntime = responseObject.getString("Runtime")
                     runtimeTv.text = movieRuntime
 
-                    val movieGenre = ": ${responseObject.getString("Genre")}"
+                    val movieGenre = responseObject.getString("Genre")
                     genreTv.text = movieGenre
 
-                    val movieDirector = ": ${responseObject.getString("Director")}"
+                    val movieDirector = responseObject.getString("Director")
                     directorsTv.text = movieDirector
 
-                    val movieWriter = ": ${responseObject.getString("Writer")}"
+                    val movieWriter = responseObject.getString("Writer")
                     writerTv.text = movieWriter
 
-                    val movieActor = ": ${responseObject.getString("Actors")}"
+                    val movieActor = responseObject.getString("Actors")
                     actorsTv.text = movieActor
 
-                    val moviePlot = ": ${responseObject.getString("Plot")}"
+                    val moviePlot = responseObject.getString("Plot")
                     plotTv.text = moviePlot
 
                     if (responseObject.getString("Poster").equals("N/A")) {

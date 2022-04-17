@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
+import android.widget.*
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +26,11 @@ class SearchForMoviesWeb : AppCompatActivity() {
     private lateinit var movieEt: EditText
     private lateinit var searchBtn: Button
     private lateinit var recyclerView: RecyclerView
+    private lateinit var messageLayout: LinearLayout
+    private lateinit var messageIv: ImageView
+    private lateinit var notFoundMessage: TextView
+
+    private lateinit var responseObject: JSONObject
 
     private lateinit var movieItemAdapter: WebViewAdapter
 
@@ -39,12 +44,22 @@ class SearchForMoviesWeb : AppCompatActivity() {
         movieEt = findViewById(R.id.webMovieEt)
         searchBtn = findViewById(R.id.movieSearchButton)
         recyclerView = findViewById(R.id.recyclerView)
+        messageLayout = findViewById(R.id.messageLl)
+        messageIv = findViewById(R.id.messageIv)
+        notFoundMessage = findViewById(R.id.messageTv)
 
         movieItemAdapter = WebViewAdapter(emptyDataList)
 
         recyclerView.adapter = movieItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        if (savedInstanceState != null) {
+            val response = savedInstanceState.getString("response", "no")
+            if (response != "no") {
+                responseObject = JSONObject(response)
+                setData(responseObject)
+            }
+        }
 
         searchBtn.setOnClickListener {
             movieEt.hideKeyboard()
@@ -55,11 +70,15 @@ class SearchForMoviesWeb : AppCompatActivity() {
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {
                         val response = connection.inputStream.bufferedReader().use { it.readLine() }
-                        val responseObject = JSONTokener(response).nextValue() as JSONObject
+                        responseObject = JSONTokener(response).nextValue() as JSONObject
                         if (responseObject.getBoolean("Response")) {
-                            getData(responseObject)
+                            setData(responseObject)
+                        } else {
                             runOnUiThread {
-                                updateRecyclerView()
+                                recyclerView.visibility = View.GONE
+                                messageLayout.visibility = View.VISIBLE
+                                notFoundMessage.visibility = View.VISIBLE
+                                messageIv.setImageResource(R.drawable.seek_not)
                             }
                         }
                     } catch (e: Exception) {
@@ -70,8 +89,21 @@ class SearchForMoviesWeb : AppCompatActivity() {
         }
     }
 
-    private fun getData(responseObject: JSONObject) {
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        if (dataList.isNotEmpty()) {
+            outState.putString("response", responseObject.toString())
+        }
+    }
+
+    private fun setData(responseObject: JSONObject) {
         dataList.clear()
+        runOnUiThread {
+            recyclerView.visibility = View.VISIBLE
+            messageLayout.visibility = View.GONE
+            notFoundMessage.visibility = View.GONE
+            messageIv.setImageResource(R.drawable.seek)
+        }
         val arrayJSON: JSONArray = responseObject.getJSONArray("Search")
         for (i in 0 until arrayJSON.length()) {
             val item: JSONObject = arrayJSON[i] as JSONObject
@@ -82,6 +114,9 @@ class SearchForMoviesWeb : AppCompatActivity() {
                     item.getString("Poster")
                 )
             )
+        }
+        runOnUiThread {
+            updateRecyclerView()
         }
     }
 

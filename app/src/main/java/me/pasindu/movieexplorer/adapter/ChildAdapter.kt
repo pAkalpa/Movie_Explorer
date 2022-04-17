@@ -12,6 +12,9 @@ class ChildAdapter(private var movieList: List<Movie>) :
     RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTv: TextView = itemView.findViewById(R.id.movieTitleTV)
+        val yearTv: TextView = itemView.findViewById(R.id.movieYearTV)
+        val runtimeTv: TextView = itemView.findViewById(R.id.movieRuntimeTV)
+        val genreTv: TextView = itemView.findViewById(R.id.movieGenreTV)
         val actorsTv: TextView = itemView.findViewById(R.id.movieActorTV)
     }
 
@@ -25,6 +28,9 @@ class ChildAdapter(private var movieList: List<Movie>) :
 
     override fun onBindViewHolder(holder: ChildAdapter.ViewHolder, position: Int) {
         holder.titleTv.text = movieList[position].title
+        holder.yearTv.text = movieList[position].year
+        holder.runtimeTv.text = movieList[position].runtime
+        holder.genreTv.text = movieList[position].genre
         holder.actorsTv.text = movieList[position].actors
     }
 
