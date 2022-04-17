@@ -41,6 +41,9 @@ class SearchForMoviesWeb : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_for_movies_web)
 
+        //        hide action bar
+        this.supportActionBar!!.hide()
+
         movieEt = findViewById(R.id.webMovieEt)
         searchBtn = findViewById(R.id.movieSearchButton)
         recyclerView = findViewById(R.id.recyclerView)
