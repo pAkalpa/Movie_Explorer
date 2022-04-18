@@ -134,13 +134,13 @@ class SearchForActors : AppCompatActivity() {
                     recyclerView.visibility = View.GONE
 //                set not found image to image view
                     messageIv.setImageResource(R.drawable.seek_not)
-                } else {
                     //                    show Toast if movie data not available
                     Toast.makeText(
                         applicationContext,
                         "Movies Not Available",
                         Toast.LENGTH_SHORT
                     ).show()
+                } else {
 //                remove component from view
                     messageTv.visibility = View.GONE
 //                set found image to image view

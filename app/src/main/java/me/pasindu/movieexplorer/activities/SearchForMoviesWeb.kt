@@ -81,7 +81,7 @@ class SearchForMoviesWeb : AppCompatActivity() {
             if (movieEt.text.isNotEmpty()) { // check edit text emptiness
 //        declare api url
                 val request =
-                    URL("https://www.omdbapi.com/?apikey=39f8221&type=movie&s=${movieEt.text}")
+                    URL("https://www.omdbapi.com/?apikey=39f8221&type=movie&s=*${movieEt.text}*")
 //        create connection
                 val connection = request.openConnection() as HttpURLConnection
 //        start lifecycleScope coroutine with Input Output dispatcher
